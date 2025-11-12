@@ -9,7 +9,8 @@ export default defineConfig({
   base: "./",
 
   // Everything inside /src/public will automatically copy to dist
-  publicDir: "public",
+  publicDir: "../public",
+
 
   build: {
     outDir: "../dist",
