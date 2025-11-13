@@ -63,12 +63,19 @@ async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate("/public/partials/header.html");
-  const footerTemplate = await loadTemplate("/public/partials/footer.html");
+  const header = document.querySelector("#main-header");
+  const footer = document.querySelector("#main-footer");
 
-  const headerElement = document.getElementById("main-header");
-  const footerElement = document.getElementById("main-footer");
+  // ✅ Acceso directo a /public/partials
+  const headerHTML = await fetch("../partials/header.html").then((res) =>
+    res.text(),
+  );
+  const footerHTML = await fetch("../partials/footer.html").then((res) =>
+    res.text(),
+  );
 
-  renderWithTemplate(headerTemplate, headerElement);
-  renderWithTemplate(footerTemplate, footerElement);
+  console.log(headerHTML);
+
+  header.innerHTML = headerHTML;
+  footer.innerHTML = footerHTML;
 }

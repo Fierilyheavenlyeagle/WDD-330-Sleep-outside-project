@@ -40,7 +40,7 @@ export default class ProductDetails {
     document.querySelector("h3").textContent = product.NameWithoutBrand;
 
     const productImage = document.getElementById("productImage");
-    productImage.src = product.Image;
+    productImage.src = `/${product.Image}`;
     productImage.alt = product.NameWithoutBrand;
 
     document.getElementById("productPrice").textContent = product.FinalPrice;
@@ -48,8 +48,15 @@ export default class ProductDetails {
     document.getElementById("productColor").textContent =
       product.Colors?.[0]?.ColorName ?? "N/A";
 
-    document.getElementById("productDescription").innerHTML =
-      product.DescriptionHtmlSimple;
+    const decodeHTML = (html) => {
+      const txt = document.createElement("textarea");
+      txt.innerHTML = html;
+      return txt.value;
+    };
+
+    document.getElementById("productDescription").textContent = decodeHTML(
+      product.DescriptionHtmlSimple,
+    );
 
     document.getElementById("addToCart").dataset.id = product.id;
   }

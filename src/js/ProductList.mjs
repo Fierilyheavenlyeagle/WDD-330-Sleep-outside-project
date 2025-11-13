@@ -1,13 +1,16 @@
-import { renderListWithTemplate } from './utils.mjs';
+import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
+
+  console.log(product)
+
   return `
     <li class="product-card">
-      <a href="product_pages/?product=${product.id}">
-        <img src="${product.Image}" alt="Image of ${product.Name}">
-        <h2 class="card_brand">${product.Brand.Name}</h2>
-        <h3 class="card_name">${product.NameWithoutBrand}</h3>
-        <p class="product-card_price">${product.FinalPrice}</p>
+      <a href="./product_pages/index.html?product=${product.Id}">
+        <img src="./${product.Image}" alt="Image of ${product.Name}">
+        <h3 class="card__brand">${product.Brand.Name}</h3>
+        <h2 class="card__name">${product.NameWithoutBrand}</h2>
+        <p class="product-card__price">${product.FinalPrice}</p>
       </a>
     </li>
   `;
@@ -26,10 +29,6 @@ export default class ProductList {
   }
 
   renderList(list) {
-    renderListWithTemplate(
-      productCardTemplate,
-      this.listElement,
-      list
-    );
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
 }
