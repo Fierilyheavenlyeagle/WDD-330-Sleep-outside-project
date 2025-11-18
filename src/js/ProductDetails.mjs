@@ -1,6 +1,6 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
-export default class ProductDetails {
+export class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
@@ -9,6 +9,7 @@ export default class ProductDetails {
 
   async init() {
     this.product = await this.dataSource.findProductById(this.productId);
+    console.log("✔ Product loaded:", this.product);
 
     this.renderProductDetails();
 
@@ -35,12 +36,72 @@ export default class ProductDetails {
 
   renderProductDetails() {
     const product = this.product;
+    console.log(product);
 
     document.querySelector("h2").textContent = product.Brand.Name;
     document.querySelector("h3").textContent = product.NameWithoutBrand;
 
     const productImage = document.getElementById("productImage");
     productImage.src = `/${product.Image}`;
+    productImage.alt = product.NameWithoutBrand;
+
+    document.getElementById("productPrice").textContent = product.FinalPrice;
+
+    document.getElementById("productColor").textContent =
+      product.Colors?.[0]?.ColorName ?? "N/A";
+
+    const decodeHTML = (html) => {
+      const txt = document.createElement("textarea");
+      txt.innerHTML = html;
+      return txt.value;
+    };
+
+    document.getElementById("productDescription").textContent = decodeHTML(
+      product.DescriptionHtmlSimple,
+    );
+
+    document.getElementById("addToCart").dataset.id = product.id;
+  }
+}
+
+export class RenderDetails {
+  constructor(product) {
+    this.product = product;
+  }
+
+  async init() {
+    this.renderProductDetails();
+
+    document
+      .getElementById("addToCart")
+      .addEventListener("click", this.addProductToCart.bind(this));
+  }
+
+  addProductToCart() {
+    let cart = getLocalStorage("so-cart");
+
+    // Ensure we always end up with a proper array
+    if (Array.isArray(cart)) {
+      // OK
+    } else if (cart && typeof cart === "object") {
+      cart = Object.values(cart);
+    } else {
+      cart = [];
+    }
+
+    cart.push(this.product);
+    setLocalStorage("so-cart", cart);
+  }
+
+  renderProductDetails() {
+    const product = this.product;
+    console.log(product);
+
+    document.querySelector("h2").textContent = product.Brand.Name;
+    document.querySelector("h3").textContent = product.NameWithoutBrand;
+
+    const productImage = document.getElementById("productImage");
+    productImage.src = `${product.Images.PrimaryLarge}`;
     productImage.alt = product.NameWithoutBrand;
 
     document.getElementById("productPrice").textContent = product.FinalPrice;

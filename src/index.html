@@ -15,7 +15,7 @@
     <header id="main-header" class="divider"></header>
 
     <main class="divider">
-      <div class="hero">
+       <div class="hero">
         <!-- ✅ Rutas relativas sin /src -->
         <img
           src="./images/banner-sm.jpg"
@@ -35,7 +35,21 @@
           </p>
         </div>
       </div>
-
+      <div id="categories">
+        <a href="./product_listing/index.html?category=backpacks">
+        <img id="backpacks" src="/images/category-backpacks.svg" alt="category-backpacks">
+        </a>
+        <a href="./product_listing/index.html?category=hammocks">
+        <img id="hammocks" src="/images/category-hammocks.svg" alt="category-hammocks">
+        </a>
+        <a href="./product_listing/index.html?category=sleepingbags">
+        <img id="sleepingbags" src="/images/category-sleepingbags.svg" 
+        alt="category-sleepingbags">
+        </a>
+        <a href="./product_listing/index.html?category=tents">
+        <img id="tents" src="/images/category-tents.svg" alt="category-tents">
+        </a>
+      </div>
       <section class="products">
         <h2>Top Products</h2>
         <ul class="product-list">
@@ -50,7 +64,6 @@
               <p class="product-card__price">$199.99</p>
             </a>
           </li>
-
           <li class="product-card">
             <a href="./product_pages/index.html?product=985RF">
               <img
@@ -86,6 +99,8 @@
               <p class="product-card__price">$69.99</p>
             </a>
           </li>
+        </ul>
+        <ul id="todo-output">
         </ul>
       </section>
     </main>

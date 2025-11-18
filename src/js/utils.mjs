@@ -79,3 +79,26 @@ export async function loadHeaderFooter() {
   header.innerHTML = headerHTML;
   footer.innerHTML = footerHTML;
 }
+
+export function getCategory() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  return urlParams.get("category");
+}
+
+export function renderCategoryWithTemplate(
+  template,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
+  const htmlStrings = list.map(template);
+
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+

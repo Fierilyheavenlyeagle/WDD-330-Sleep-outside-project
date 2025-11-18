@@ -1,14 +1,20 @@
 import ProductData from "./ProductData.mjs";
-import { getParam } from "./utils.mjs";
-import ProductDetails from "./ProductDetails.mjs";
+import { getCategory, getParam } from "./utils.mjs";
+import { RenderDetails } from "./ProductDetails.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
-const dataSource = new ProductData("tents");
-const productId = getParam("product");
+const category = getCategory("category");
 
-const product = new ProductDetails(productId, dataSource);
-product.init();
+const dataCategory = new ProductData(category);
 
-console.log("Product details initialized:", product);
+const products = await dataCategory.getData(category);
+
+let id = getParam("product");
+
+const product = products.find((item) => item.Id === id);
+
+const render = new RenderDetails(product);
+
+render.init();
 
 loadHeaderFooter();
 
