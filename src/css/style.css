@@ -256,6 +256,35 @@ footer {
   margin-top: 4rem;
 }
 
+#breadcrumb {
+  font-size: 0.9rem;
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap:8px;
+  align-items: center;
+}
+
+#breadcrumb a {
+  color: #0077aa;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+#breadcrumb a:hover {
+  color: #95c0d2;
+  text-decoration: underline;
+}
+
+#breadcrumb .separator {
+  color: #888;
+  font-size: 0.9rem;
+  user-select: none;
+  font-weight: 400;
+}
+
+
+
 /* ------------------------------
    RESPONSIVE
 ------------------------------ */

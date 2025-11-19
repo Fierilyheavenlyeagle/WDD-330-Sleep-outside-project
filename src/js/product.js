@@ -2,7 +2,11 @@ import ProductData from "./ProductData.mjs";
 import { getCategory, getParam } from "./utils.mjs";
 import { RenderDetails } from "./ProductDetails.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
+import { createBreadcrumbInProduct } from "./utils.mjs";
+
 const category = getCategory("category");
+
+createBreadcrumbInProduct(category);
 
 const dataCategory = new ProductData(category);
 

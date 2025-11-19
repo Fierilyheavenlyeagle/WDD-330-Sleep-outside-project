@@ -1,3 +1,5 @@
+import ProductData from "./ProductData.mjs";
+
 // Wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -102,3 +104,20 @@ export function renderCategoryWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
+export async function createBreadcrumbInListing(productsArray, category) {
+  const breadcrumb = document.querySelector("#breadcrumb");
+
+  breadcrumb.innerHTML = `<a href="">${category}</a> <span class="separator">></span> <a href="">(${productsArray.length} items)</a>`;
+}
+
+export async function createBreadcrumbInProduct(category) {
+  const breadcrumb = document.querySelector("#breadcrumb");
+
+  breadcrumb.innerHTML = `<a href="">${category}</a>`;
+}
+
+export async function createBreadcrumbInCart() {
+  const breadcrumb = document.querySelector("#breadcrumb");
+
+  breadcrumb.innerHTML = `<a href ="">Cart</a>`;
+}
